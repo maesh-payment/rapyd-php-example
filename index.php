@@ -7,7 +7,7 @@ if(!empty($_GET["action"])) {
 switch($_GET["action"]) {
 	case "add":
 		if(!empty($_POST["quantity"])) {
-			$productByCode = $db_handle->runQuery("SELECT * FROM tblproduct WHERE code='" . $_GET["code"] . "'");
+			$productByCode = $db_handle->runQuery("SELECT * FROM products WHERE code='" . $_GET["code"] . "'");
 			$itemArray = array($productByCode[0]["code"]=>array('name'=>$productByCode[0]["name"], 'code'=>$productByCode[0]["code"], 'quantity'=>$_POST["quantity"], 'price'=>$productByCode[0]["price"], 'image'=>$productByCode[0]["image"]));
 			
 			if(!empty($_SESSION["cart_item"])) {
@@ -41,11 +41,10 @@ switch($_GET["action"]) {
 
 	case "rapyd":
 		$body = [
-		"amount" => 100,
+		"amount" => 100, // Set price of products here
 		"complete_checkout_url" => "http://example.com/complete",
 		"country" => "SG",
-		"currency" => "SGD",
-		"merchant_reference_id" => "950ae8c6-76"
+		"currency" => "SGD"
 		];
 
 	try {
@@ -126,7 +125,7 @@ if(isset($_SESSION["cart_item"])){
 <div id="product-grid">
 	<div class="txt-heading">Products</div>
 	<?php
-	$product_array = $db_handle->runQuery("SELECT * FROM tblproduct ORDER BY id ASC");
+	$product_array = $db_handle->runQuery("SELECT * FROM products ORDER BY id ASC");
 	if (!empty($product_array)) { 
 		foreach($product_array as $key=>$value){
 	?>
