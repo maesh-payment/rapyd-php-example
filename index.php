@@ -44,7 +44,8 @@ switch($_GET["action"]) {
 		"amount" => 100, // Set price of products here
 		"complete_checkout_url" => "http://example.com/complete",
 		"country" => "SG",
-		"currency" => "SGD"
+		"currency" => "SGD",
+		"payment_method_types_include" => ["sg_paynow_bank"]
 		];
 
 	try {
